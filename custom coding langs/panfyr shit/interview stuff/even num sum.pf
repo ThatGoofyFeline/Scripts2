@@ -1,0 +1,21 @@
+programInit("Even_num_sum") {
+    core.import(Panfyr.Core)
+    core.input(console)
+}
+
+classDef("Main", input[]) {
+
+    dataDef.local("numbers") = array{int[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+    dataDef.local("sum") = int[0]
+
+    funcDef("sum_even_nums", input[inputNums]) {
+
+        forEach(int["num"] - inputNums) {
+            if((num) % 2 == 0) {
+                data("sum") += data("num")
+            }
+        }
+
+        return: data("sum")
+    }
+}

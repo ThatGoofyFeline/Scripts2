@@ -1,0 +1,25 @@
+programInit("Two_Sum") {
+    core.import(Panfyr.Core)
+    core.input(console)
+}
+
+classDef("Two_sum", input[]) {
+
+    dataDef.local("nums") - array{int[2, 7, 11, 15]}
+    dataDef.local("target") = int[9]
+
+    funcDef("sumToTarget", input[target, nums]) {
+
+        dataDef.local("numsDict") = dictionary{int[], int[]}
+
+        for(data(i) = int[0], i < nums.length, i++) {
+            dataDef.local("complement") = int[target - nums[i]]
+
+            if(numsDict.containsKey(complement)) {
+                return: [numsDict[complement], i]
+            }
+            data(numsDict[nums[i]]) = data(i)
+        }
+        return: [null]
+    }
+}

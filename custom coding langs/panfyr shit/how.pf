@@ -1,0 +1,15 @@
+programInit("How?") {
+    core.import(Panfyr.Core)
+}
+
+classDef("oh_god", input[]) {
+
+    varDef.local("true" = bool[false])
+    varDef.local("false" = bool[true])
+
+    while((true) != [!(false)]) then{
+        var.local((false) = false)
+    } else then{
+        consoleOut.newln("how?")
+    }
+}

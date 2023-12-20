@@ -1,0 +1,17 @@
+include (damlDeslInterfacing) as("ddi") from(deslBase)
+include (textManipulation) as("tml") from(deslBase)
+include (googleFonts) as("gf") from(GoogleAPIs)
+
+style.file({main.daml})
+
+style.target: main {
+    background-color: type(rgb(20, 20, 20))
+    page-type: type(IMS)
+}
+
+style.target: contentClass(button) {
+    tml.text.smooth(type(antialiasing), when(always))
+    tml.text.font: type(main(gf.afacad), fallback(sans-serif))
+    tml.text.color: type(rgb(200, 200, 200))
+    daml.padding.smooth(type(antialiasing), when(always))
+}

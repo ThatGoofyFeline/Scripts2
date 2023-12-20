@@ -1,0 +1,26 @@
+<#DOCTYPE: wdaml>
+
+<#main:>
+
+    <!metaTag:>
+        <metaTag: charset:= UTF-8 ;>
+        <metaTag: content.viewport:= device.viewport; content.scale:= 1.0 ;>
+    <!;metaTag> 
+
+    <head:>
+        <title: "Interactive Button Example ;>
+    <;head>
+
+    <!content:>
+        contentClass(type= "Button") {
+            properties.size:= 60px, 75px
+            properties.padding:= 10px, 20px
+            properties.font.size:= 16px
+            properties.cursor:= pointer
+        }
+    <!;content>
+
+    <content.button: text:= "Click here!"; id:= "button"; controlScript:= {button.ms} ;>
+
+    <styling: type:= {styling.desl} ;>
+<#;main>

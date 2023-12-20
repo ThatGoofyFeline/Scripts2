@@ -1,0 +1,8 @@
+programInit("FizzBuzz") {
+    core.import(Panfyr.Core)
+}
+
+classDef("Main", input[]) {
+
+    switch(num)
+}

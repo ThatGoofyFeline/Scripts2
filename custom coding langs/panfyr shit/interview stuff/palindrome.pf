@@ -1,0 +1,23 @@
+programInit("Palindrome_Checker") {
+    core.import(Panfyr.Core)
+    core.input(console)
+}
+
+classDef("Main", input[]) {
+
+    funcDef("isPalindrome", input[string]) {
+    
+        & Convert the provided string into a lowercase, no-spaces version
+        data("string") = string.replace(" ", "").lowercase()
+        
+        & Make the new reversed string
+        data("reversedString") = string.reverse()
+
+        & Compare the two strings
+        if((reversedString) == (string)) then{
+            return: bool(true)
+        } else then{
+            return: bool(false)
+        }
+    }
+}

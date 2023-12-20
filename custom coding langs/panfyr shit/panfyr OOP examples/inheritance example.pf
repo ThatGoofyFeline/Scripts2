@@ -1,0 +1,38 @@
+& Start the script
+programMain("Inheritance Example") {
+    coreFunc.import(Panfyr.Core)
+}
+
+& Animal class def
+classDef("Animal", input[properties]) {
+    
+    & "Walk" function
+    funcDef("Walk" input[]) {
+        consoleOut(*"[properties.name] is walking")
+    }
+}
+
+& Cat class def
+classDef("Cat" : "Animal", input[properties]) {
+
+    & "Meow" function
+    funcDef("Meow", input[]) {
+        consoleOut(*"[properties.name] is meowing")
+    }
+}
+
+& The main function
+classDef("Main" input[]) {
+
+    & Make an object instance of the "Cat" class
+    objectDef("myCat", new[Cat])
+
+    & Name "myCat" Mittens
+    object([myCat.name] = "Mittens")
+
+    & Make Mittens meow
+    object([myCat.Meow()])
+
+    & Make Mittens walk
+    object([myCat.Walk()])
+}

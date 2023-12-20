@@ -1,0 +1,58 @@
+& Start the program
+programMain("Polymorphism Example") {
+    coreFunc.import(Panfyr.Core)
+}
+
+& Static polymorphism example:
+classDef("Static polymorphism" input[properties]) {
+
+    & "Sound" method
+    funcDef("Sound" input[is_cat]) {
+        consoleOut(*"[properties.name] is meowing!")
+    }
+
+    & Another "Sound" method
+    funcDef("Sound" input[is_dog]) {
+        consoleOut(*"[properties.name] is barking!")
+    }
+}
+
+& Dynamic polymorphism example
+classDef("Animal" input[properties]) {
+
+    & Generic sound method
+    funcDef("Generic Sound" input[]) {
+        consoleOut(*"[properties.name] is making a sound!")
+    }
+}
+
+& Cat sub-class which overrides the generic sound function
+classDef("Cat" : "Animal", input[properties]) {
+
+    & Meow method
+    funcDef("Meow" input[]) {
+        consoleOut(*"[properties.name] is meowing!")
+    }
+}
+
+& Main class
+classDef("Main" input[]) {
+    
+    & Make a "cat" static polymorphism object
+    objectDef("myCat" = new[Static polymorphism])
+
+    & Make "myCat" meow
+    object([myCat.Sound(is_cat = true)])
+
+    & Make a "dog" static polymorphism object
+    objectDef("myDog" = new[Static polymorphism])
+
+    & Make "myDog" meow
+    object([myDog.Sound(is_dog = true)])
+
+    & Dynamic polymorphism object
+    objectDef("myCat2" = new[Cat])
+
+    & Make "myCat2" meow
+    object([myCat2.meow()])
+}

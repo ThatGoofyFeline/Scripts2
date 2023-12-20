@@ -1,0 +1,54 @@
+& Color changing window script!
+
+& Import Clawmark
+import[Clawmark] as(“cm”)
+
+& Start the initialization script
+scriptStart("Window Init")
+
+& Set the "Run" variable to 1
+var.local(Run = 1)
+
+    & Initialize the color variables, and the stepping value
+    var.local("Red" = 0)
+    var.local("Green" = 0)
+        var.local("Blue" = 0)
+var.local("Step" = 1)
+
+    & Initialise window function	
+    funcDef(“Window Init”)
+        cm.windowToolbar("Test" minimize, maximize, close)
+        cm.windowWidth(800)
+        cm.windowHeight(600)
+        cm.windowBackground(rgb; bgcolor)
+
+    & Call the initialization function
+    funcCall(“Window Init”)
+
+    & End the initialization script
+scriptEnd("Window Init")
+
+& Make the color changing loop
+scriptLoop.start("Change Color" [Run = 1], 0.5s)
+
+    & Color changing check loop
+    if [Red, Green, Blue] != 255 then
+        & Change the RGB color, of color variable
+        var.local(bgcolor = [Red + Step], [Green + Step], [Blue + Step])
+    else [Red, Green, Blue] == 0 then
+        var.local(bgcolor = [Red - Step], [Green - Step], [Blue - Step])
+
+scriptLoop.end("Change Color")
+
+& Main loop
+scriptLoop.start(“Main Loop” [Run = 1], 0ms)
+
+    & Update the screen
+    cm.windowUpdate()
+
+    & Check if the user pressed "space" and if so, stop the program
+    if consoleIn(key.pressed[space]) then
+        var.local(Run = 0)
+
+& End the script
+scriptLoop.end(“Main Loop”)

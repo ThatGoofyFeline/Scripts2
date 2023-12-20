@@ -1,0 +1,25 @@
+& Start the program
+programMain("Classes example") {
+    coreFunc.import(Panfyr.Core)
+}
+
+classDef("Cat" input[properties]) {
+
+    & Meow method
+    funcDef("Meow" input[]) {
+        consoleOut(*"[properties.name] is meowing")
+    }
+}
+
+& Main class
+classDef("Main" input[]) {
+
+    & Make the "myCat" object instance
+    objectDef("myCat" = new[Cat])
+
+    & Name "myCat" "Mittens"
+    object([myCat.name] = "Mittens")
+
+    & Make Mittens meow
+    object([myCat.Meow()])
+}

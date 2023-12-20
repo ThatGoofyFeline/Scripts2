@@ -1,0 +1,41 @@
+& Guess the number script!
+& Start the script
+scriptStart("Init")
+
+    & import the "Random" library
+    import[Random] as("rdm")
+
+    & Make a list of possible numbers, for use-on later
+    array.local(Numbers = [1; 10])
+
+    & Designate how many attempts
+    var.local(Attempts = 3)
+
+    & Stop the "init" script
+scriptEnd("Init")
+
+& Start the script loop
+scriptLoop.start("Guess The Number" [true], 0ms)
+
+    & Generate the random number
+    var.local(RandomNum = rdm.num(range[1; 10]))
+
+    & Prompt the user to input a number, as a function, and check if it is indeed a number, as a loop
+    if Attempts != 0 then
+        funcDef.loop("Prompt User")
+            consolePrompt(UserNum = input["Guess the number!"])
+            if UserNum != array.anyOf("Numbers") then
+                consoleOut("Invalid Input!")
+
+    & Check if the numbers match
+    if RandomNum == UserNum then
+        consoleout("Yay! You guessed the number!")
+    elif UserNum > RandomNum then
+        var.local(Attempts = [Attempts - 1])
+        consoleOut("Try a little lower! You have [Attempts] more attempts!")
+    elif UserNum < RandomNum then
+        var.local(Attempts = [Attempts - 1])
+        consoleOut("Try a little higher! You have [Attempts] more attempts!")
+
+& End the script loop
+scriptLoop.end("Guess The Number")

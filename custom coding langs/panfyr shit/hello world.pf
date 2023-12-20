@@ -1,0 +1,7 @@
+programInit("Hello world"){
+    core.import(Panfyr.Core)
+}
+
+classDef("Hello world", input[]) {
+    consoleOut.newln("Hello, World!")
+}

@@ -1,0 +1,82 @@
+& Start the program & import Panfyr.Math as "pfm"
+programInit("Calculator") {
+    core.import(Panfyr.Core)
+    import(Panfyr.Math, as["pfm"])
+}
+
+& Main Classspace (because why not)
+classSpaceDef("Main") {
+    
+    & Functions:
+    & Addition function
+    funcDef("Add", input[num1, num2]) {
+        return var.local("Result" = pfm.calc[num1 + num2])
+    }
+
+    & Subtraction function
+    funcDef("Sub", input[num1, num2]) {
+        return var.local("Result" = pfm.calc[num1 - num2])
+    }
+
+    & Multiplication function
+    funcDef("Mult", input[num1, num2]) {
+    return var.local("Result" = pfm.calc[num1 * num2])
+    }
+
+    & Division function (w/ error handling)
+    funcDef("Div", input[num1, num2]) {
+        try{
+            return var.local("Result" = pfm.calc[num1 / num2])
+        } catch((num2) = 0) {
+            return consoleOut.newln("Error! Cannot divide by 0!")
+        }
+    }
+
+    & Make the calculator class
+    classDef("Calculator", input[]) {
+
+        varDef.local("Result" = int[0]) & Initialize the "Result" variable
+
+        while([true]) { & Loop start
+
+            & Get the user's operation choice, and store it in a super (which can handle any type of data)
+            varDef.local("Operation" = super[consoleIn{
+                consoleOut.newln("Choose an operation!")
+                consoleOut.newln("1: Addition")
+                consoleOut.newln("2: Subtraction")
+                consoleOut.newln("3: Multiplication")
+                consoleOut.newln("4: Division")
+                consoleOut.newln("5: Quit")
+            }])
+
+            if((Operation) == "Quit" || 5) then{ & Check if the user wants to quit, if so, quit
+                loopBreak("Calculator")
+            }
+
+            & Prompt them for both numbers
+            varDef.local("num1" = int[consolePrompt("Choose you first number")])
+            varDef.local("num2" = int[consolePrompt("Choose your second number")])
+
+            & Check each operation choice, if it's one, call the corresponding function, if not, it says "Invalid input!"
+            if((Operation) == "Addition" || 1) then{
+                funcCall("Add", input[(num1), (num2)])
+                consoleOut.newln("Result: " + (Result))
+            }
+            elif((Operation) == "Addition" || 2) then{
+                funcCall("Sub", input[(num1), (num2)])
+                consoleOut.newln("Result: " + (Result))
+            }
+            elif((Operation) == "Multiplication" || 3) then{
+                funcCall("Mult", input[(num1), (num2)])
+                consoleOut.newln("Result: " + (Result))
+            }
+            elif((Operation) == "Division" || 4) then{
+                funcCall("Div", input[(num1), (num2)])
+                consoleOut.newln("Result: " + (Result))
+            }
+            else then{
+                consoleOut.newln("Invalid input!")
+            }
+        }
+    }
+}

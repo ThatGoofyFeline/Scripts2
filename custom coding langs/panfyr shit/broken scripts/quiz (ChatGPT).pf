@@ -1,0 +1,58 @@
+& A simple quiz
+
+& Start the script
+scriptMain("Quiz")
+    coreFunc.import(Panfyr.Core)
+    import(Random) as("rdm")
+
+& Define the question function
+funcDef("AskQuestion", input[Question#]){
+    if("Question#" == 1) then{
+        var.local("UserAnswer" = consoleIn{
+            return consoleOut("What is the capital of France?")
+            return consoleOut("A: Berlin")
+            return consoleOut("B: Madrid")
+            return consoleOut("C: Paris")
+            return consoleOut("D: Rome")
+        })
+    }
+    if("UserAnswer" == "Paris") then{
+        return consoleOut("Correct!")
+    }
+    if([UserAnwser] != "Paris") then{
+        return consoleOut("Wrong!")
+    }
+    if Question# == 2 then
+        var.local("UserAnswer" = consoleIn{
+            return consoleOut("Which planet is known as the Red Planet?")
+            return consoleOut("A: Mars")
+            return consoleOut("B: Jupiter")
+            return consoleOut("C: Venus")
+            return consoleOut("D: Saturn")
+        })
+    if UserAnswer == "Mars" then
+        return consoleOut("Correct!")
+    if UserAnwser != "Mars" then
+        return consoleOut("Wrong!")
+    if Question# == 1 then
+        var.local("UserAnswer" = consoleIn{
+            return consoleOut("What is the largest mammal on Earth?")
+            return consoleOut("A: Elephant")
+            return consoleOut("B: Blue Whale")
+            return consoleOut("C: Giraffe")
+            return consoleOut("D: Gorilla")
+        })
+    if UserAnswer == "Blue Whale" then
+        return consoleOut("Correct!")
+    if UserAnswer != "Blue Whale" then
+        return consoleOut("Wrong!")
+}
+
+& Randomly select the question number
+var.local(Question# = rdm.num[1; 3])
+
+& Main loop!
+loop.start("Quiz", [true], 3s)
+    consoleOut("Quiz!")
+    funcCall("AskQuestion")
+loop.end("Quiz")

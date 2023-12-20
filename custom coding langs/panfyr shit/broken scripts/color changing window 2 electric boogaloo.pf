@@ -1,0 +1,38 @@
+& Color changing window script but different (FIXED)! Also setting the "Run" variable to 1
+& Initialization script
+scriptStart("Window Init")
+
+    var.local(Run = 1)
+
+    & Import Clawmark
+    import[Clawmark] as(“cm”)
+
+    & Initialize window function
+    funcDef(“Window Init”)
+        cm.windowToolbar("Test" minimize, maximize, close)
+        cm.windowWidth(800)
+        cm.windowHeight(600)
+        cm.windowBackground(rgb; bgcolor)
+
+    & Call the initialization function
+    funcCall(“Window Init”)
+
+    & End the initialization loop
+scriptEnd("Window Init")
+
+& Main loop
+scriptLoop.start(“Main Loop” [Run = 1], 0ms)
+
+    & Update the screen
+    cm.windowUpdate()
+
+    & Check if the user pressed "escape" and if so, stop the program
+    if consoleIn(key.pressed[escape]) then
+        var.local(Run = 0)
+
+    & Check if the user pressed "space" and if so, stop the program
+    if consoleIn(key.pressed[space]) then
+        consolePrompt(bgcolor = input(rgb["Input new RGB color (R, G, B)"]))
+
+    & End the script
+scriptLoop.end(“Main Loop”)
